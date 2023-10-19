@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/ilib-localespec-doc/docs/static/css/main.e6c13ad2.css",
-    "main.js": "/ilib-localespec-doc/docs/static/js/main.dfa31f3e.js",
+    "main.js": "/ilib-localespec-doc/docs/static/js/main.a4e8ee07.js",
     "node_modules/ilib/locale/charmaps/EUC-TW.json": "/ilib-localespec-doc/docs/node_modules/ilib/locale/charmaps/EUC-TW.json",
     "node_modules/ilib/locale/zh/Hant/collation.json": "/ilib-localespec-doc/docs/node_modules/ilib/locale/zh/Hant/collation.json",
     "node_modules/ilib/locale/charmaps/GB18030.json": "/ilib-localespec-doc/docs/node_modules/ilib/locale/charmaps/GB18030.json",
@@ -6195,10 +6195,10 @@
     "node_modules/ilib/locale/charset/Ventura-US.json": "/ilib-localespec-doc/docs/node_modules/ilib/locale/charset/Ventura-US.json",
     "node_modules/ilib/locale/charset/us-dk.json": "/ilib-localespec-doc/docs/node_modules/ilib/locale/charset/us-dk.json",
     "main.e6c13ad2.css.map": "/ilib-localespec-doc/docs/static/css/main.e6c13ad2.css.map",
-    "main.dfa31f3e.js.map": "/ilib-localespec-doc/docs/static/js/main.dfa31f3e.js.map"
+    "main.a4e8ee07.js.map": "/ilib-localespec-doc/docs/static/js/main.a4e8ee07.js.map"
   },
   "entrypoints": [
     "static/css/main.e6c13ad2.css",
-    "static/js/main.dfa31f3e.js"
+    "static/js/main.a4e8ee07.js"
   ]
 }
