@@ -33,7 +33,7 @@
     "fs-extra": "^11.1.1",
     "html-webpack-plugin": "^5.5.3",
     "identity-obj-proxy": "^3.0.0",
-    "ilib": "npm:ilib-webos@14.18.0-webos1",
+    "ilib": "14.18.0",
     "mini-css-extract-plugin": "^2.7.6",
     "postcss": "^8.4.31",
     "postcss-flexbugs-fixes": "^5.0.2",
@@ -65,7 +65,7 @@
     "start": "node scripts/start.js",
     "build": "node scripts/build.js",
     "clean": "rm -rf build",
-    "postbuild": "react-snap"
+    "snapshot": "react-snap"
   },
   "eslintConfig": {
     "extends": [
@@ -94,7 +94,7 @@
     "@enact/dev-utils": "^6.0.2",
     "react-snap": "^1.23.0"
   },
-  "homepage": "http://i18n.lge.com/ilib/localeSpecDoc/reference",
+  "homepage": "https://ilib-js.github.io/ilib-localespec-doc/docs",
   "reactSnap": {
     "include": [
       "/locales/ar-EG",
