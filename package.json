@@ -65,7 +65,7 @@
     "start": "node scripts/start.js",
     "build": "node scripts/build.js",
     "clean": "rm -rf build",
-    "snapshot": "react-snap"
+    "postbuild": "react-snap"
   },
   "eslintConfig": {
     "extends": [
@@ -94,7 +94,7 @@
     "@enact/dev-utils": "^6.0.2",
     "react-snap": "^1.23.0"
   },
-  "homepage": "https://ilib-js.github.io/ilib-localespec-doc/docs",
+  "homepage": "https://ilib-js.github.io/ilib-localespec-doc/",
   "reactSnap": {
     "include": [
       "/locales/ar-EG",

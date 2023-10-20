@@ -6,7 +6,7 @@ import { BrowserRouter } from 'react-router-dom';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <BrowserRouter basename="/ilib-localespec-doc/docs">
+  <BrowserRouter basename="/ilib-localespec-doc">
     <App />
   </BrowserRouter>
 );
