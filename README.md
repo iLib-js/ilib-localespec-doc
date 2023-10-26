@@ -1,13 +1,15 @@
 ## Overview
 This is documentation for checking in locale's information from [iLib](https://github.com/iLib-js/iLib).  
 Here's a feature list that you can see:
- * Basic LocaleInfo
- * DateTime Format
- * DateRange Format
- * Duration Format
- * NumberFormat
+ * Basic Information
+ * Names of days and months
+ * Range of Meridiem Units
+ * Data Format : Date/Time
+ * Data Format : DateRange
+ * Data Format : Date/Time Duration
+ * Data Format : Number
 
-and Please visit [here](Locales.md) to see the locale list,
+and Please visit [here](Locales.md) to see the locale list.
 
 ## Getting Started
 
