@@ -1,6 +1,17 @@
+## Overview
+This is documentation for checking in locale's information from [iLib](https://github.com/iLib-js/iLib).  
+Here's a feature list that you can see:
+ * Basic LocaleInfo
+ * DateTime Format
+ * DateRange Format
+ * Duration Format
+ * NumberFormat
+
+and Please visit [here](Locales.md) to see the locale list,
+
 ## Getting Started
 
-This project is a simple app that was bootstrapped with [Create React App](https://github.com/facebook/create-react-app) and using [MUI](https://mui.com) to display locale Spec references with ILib.
+This project is a simple app that was bootstrapped with [Create React App](https://github.com/facebook/create-react-app) and using [MUI](https://mui.com) to display locale Spec references with [iLib](https://github.com/iLib-js/iLib).  
 
 ## Notes
 
