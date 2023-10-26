@@ -214,7 +214,7 @@ export const locales = {
     "Wolof - Senegal":"wo-SN",
     "Yoruba -Benin": "yo-BJ",
     "Yoruba -Nigeria": "yo-NG",
-    "Zulu - South Africa":"zu-ZA",
+    "Zulu - South Africa":"zu-ZA"
 };
 
 export const numberSamplesForPlural = {
