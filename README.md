@@ -12,7 +12,7 @@ Here's a feature list that you can see:
 and Please visit [here](Locales.md) to see the locale list.
 
 #### Preview 
-<img src="./localeSpecDoc_Snapshot.png" width="1200" height="700"/>
+<img src="./localeSpecDoc_Snapshot.png" width="1000" height="600"/>
 
 ## Getting Started
 
