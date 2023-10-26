@@ -11,7 +11,8 @@ Here's a feature list that you can see:
 
 and Please visit [here](Locales.md) to see the locale list.
 
-[test](./build/locales/ko-KR/index.html)
+#### Preview 
+<img src="./localeSpecDoc_Snapshot.png" width="900" height="500"/>
 
 ## Getting Started
 
