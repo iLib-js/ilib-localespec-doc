@@ -11,6 +11,8 @@ Here's a feature list that you can see:
 
 and Please visit [here](Locales.md) to see the locale list.
 
+[test](./build/locales/ko-KR/index.html)
+
 ## Getting Started
 
 This project is a simple app that was bootstrapped with [Create React App](https://github.com/facebook/create-react-app) and using [MUI](https://mui.com) to display locale Spec references with [iLib](https://github.com/iLib-js/iLib).  
