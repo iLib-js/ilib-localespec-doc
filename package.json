@@ -65,7 +65,10 @@
     "start": "node scripts/start.js",
     "build": "node scripts/build.js",
     "clean": "rm -rf build",
-    "postbuild": "react-snap"
+    "postbuild": "react-snap",
+    "modifyPath": "node util/replace.js util/config.json",
+    "copy": "cp tmp/package.json . ; cp tmp/index.js src/index.js",
+    "updatePath": "npm-run-all modifyPath copy"
   },
   "eslintConfig": {
     "extends": [
@@ -92,6 +95,7 @@
   },
   "devDependencies": {
     "@enact/dev-utils": "^6.0.2",
+    "npm-run-all": "^4.1.5",
     "react-snap": "^1.23.0"
   },
   "homepage": "https://ilib-js.github.io/ilib-localespec-doc/",
