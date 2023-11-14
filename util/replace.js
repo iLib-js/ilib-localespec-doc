@@ -30,7 +30,7 @@ indexJSFile(configData);
 
 function packageJSONFile(configData) {
     console.log("Modify package.json ...");
-    var orgPkgData = JSON.parse(fs.readFileSync("../package.json", "utf-8"));
+    var orgPkgData = JSON.parse(fs.readFileSync("./package.json", "utf-8"));
     orgPkgData["homepage"] = configData.packages.homepage;
     if (typeof configData.packages.ilibVersion !== 'undefined') {
         orgPkgData["dependencies"]["ilib"] = configData.packages.ilibVersion;
