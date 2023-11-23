@@ -14,13 +14,13 @@ const i18nLocaleList = Object.keys(locales).sort();
 
 const LocaleDrawer = ({locale}) => {
   const navigate = useNavigate();
-	const [localeIndex, setLocaleIndex] = useState(0);
-	const [localeList, setLocaleList] = useState(i18nLocaleList);
+  const [localeIndex, setLocaleIndex] = useState(0);
+  const [localeList, setLocaleList] = useState(i18nLocaleList);
 
-	const clickHandler = useCallback((index) => {
+  const clickHandler = useCallback((index) => {
     setLocaleIndex(index);
-	  navigate('/locales/' + locales[localeList[index]]);
-	}, [navigate, localeList]);
+    navigate('/locales/' + locales[localeList[index]]);
+  }, [navigate, localeList]);
 
   const requestSearch = (input) => {
     const filteredLocaleList = i18nLocaleList.filter((locale) => {

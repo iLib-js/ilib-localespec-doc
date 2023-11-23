@@ -24,10 +24,10 @@ const Duration = ({locale}) => {
         for (let j = 0; j < formatLength.length; j++) {
             const sample = numberOfDuration[i];
             const formatter = new DurationFmt({locale: locale, style: 'text', length: formatLength[j]});
-			const dateFormatResult = formatter.format({year: sample, month: sample, week: sample, day: sample}).toString()
+      const dateFormatResult = formatter.format({year: sample, month: sample, week: sample, day: sample}).toString()
             const timeFormatResult = formatter.format({hour: sample, minute: sample, second: sample}).toString()
             dateDurations[i].push([formatLength[j], dateFormatResult]);
-			timeDurations[i].push([formatLength[j], timeFormatResult]);
+      timeDurations[i].push([formatLength[j], timeFormatResult]);
         }
     }
     return {dateDurations, timeDurations, formatLength};
@@ -41,7 +41,7 @@ const Duration = ({locale}) => {
         {'Data Format: Date/Time Duration'}
       </Typography>
       <TableContainer sx={{mt: 3, ml: 3, mr: 3, width: 1200}}>
-				<Table sx={{minWidth: 350, width: 1200}} size="small">
+        <Table sx={{minWidth: 350, width: 1200}} size="small">
           <TableHead>
             <TableRow>
               <TableCell sx={{fontWeight: 'bold'}}>Date / Time</TableCell>

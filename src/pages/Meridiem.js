@@ -26,7 +26,7 @@ const Meridiem = ({locale}) => {
         {'Range of Meridiem Units'}
       </Typography>
       <TableContainer sx={{mt: 3, ml: 3, mr: 3, width: 1200}}>
-				<Table sx={{minWidth: 350, width: 1200}} size="small">
+        <Table sx={{minWidth: 350, width: 1200}} size="small">
           <TableHead>
             <TableRow>
               <TableCell sx={{fontWeight: 'bold'}}>Time Range</TableCell>
