@@ -22,27 +22,41 @@ This project is a simple app that was bootstrapped with [Create React App](https
 
 1. This project is already ejected(`eject` in CRA), so you need to maintain all of the configurations yourself.
 
-2. If you want to change the version of ILib or root of this project, you can change them(`homepage`, `dependencies` in `package.json`, and `basename` in `src/index.js`).
+2. If you want to change the version of ILib or the root of this project, you can change them(`homepage`, `dependencies` in `package.json`, and `basename` in `src/index.js`).
+
    For example,
-```
-// package.json
-...
-"ilib": "14.18.0",
-...
-```
-```
+
+```json
 // package.json
 ...
 "ilib": "npm:ilib-webos@14.18.0-webos1",
 ...
 "homepage": "http://i18n.lge.com/ilib/localeSpecDoc/reference",
 ...
+```
+```js
 // src/index.js
 ...
 <BrowserRouter basename="/ilib/localeSpecDoc/reference">
 ...
 
 ```
+3. There is a script file to help the above #2 work easily.   
+First, Modify  `util/config.json` file. Then execute a `npm run updatePath` in the root. You will find the data is updated properly as you expect.
+Here is an example of a  `config.json` file.
+```json
+// config.json
+{
+    "packages": {
+        "homepage": "http://i18n.lge.com/ilib/localeSpecDoc/reference",
+        "ilibVersion": "npm:ilib-webos@14.18.0-webos1"
+    },
+    "index": {
+        "basename":"/ilib/localeSpecDoc/reference"
+    }
+}
+```
+
 
 ## Available Scripts
 

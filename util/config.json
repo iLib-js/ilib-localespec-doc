@@ -1,0 +1,9 @@
+{
+    "packages": {
+        "homepage": "http://i18n.lge.com/ilib/localeSpecDoc/new_reference",
+        "ilibVersion": "npm:ilib-webos@14.18.0-webos1"
+    },
+    "index": {
+        "basename":"/ilib/localeSpecDoc/new_reference"
+    }
+}
