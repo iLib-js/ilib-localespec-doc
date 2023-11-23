@@ -8,8 +8,12 @@ const Header = () => {
     return (
       <AppBar position="fixed" sx={{ zIndex: (theme) => theme.zIndex.drawer + 1 }}>
         <Toolbar>
-          <Typography variant="h6" noWrap component="div">
+        <Typography variant="h6" noWrap component="div">
             {`Locale Spec Reference (iLib v${ilib.getVersion()})`}
+          </Typography>
+          
+          <Typography variant="h7" noWrap component="div" sx={{ml:1, pt:0.5}} >
+            {`Based on the CLDR v${ilib.getCLDRVersion()}`}
           </Typography>
         </Toolbar>
       </AppBar>

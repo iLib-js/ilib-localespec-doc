@@ -7,6 +7,7 @@ import DateTime from './DateTime';
 import DateRange from './DateRange';
 import Duration from './Duration';
 import Number from './Number';
+import Copyright from './Copyright';
 
 const LocaleRef = () => {
   const {locale} = useParams();
@@ -19,6 +20,7 @@ const LocaleRef = () => {
       <DateRange locale={locale} />
       <Duration locale={locale} />
       <Number locale={locale} />
+      <Copyright />
     </Box>
   );
 };
