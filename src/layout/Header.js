@@ -13,7 +13,7 @@ const Header = () => {
           </Typography>
           
           <Typography variant="h7" noWrap component="div" sx={{ml:1, pt:0.5}} >
-            {`Based on the CLDR v${ilib.getCLDRVersion()}`}
+            {`Based on version CLDR v${ilib.getCLDRVersion()}`}
           </Typography>
         </Toolbar>
       </AppBar>
