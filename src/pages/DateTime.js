@@ -38,7 +38,7 @@ const DateTime = ({locale}) => {
         {'Data Format: Date/Time'}
       </Typography>
       <TableContainer sx={{mt: 3, ml: 3, mr: 3, width: 1200}}>
-				<Table sx={{minWidth: 350, width: 1200}} size="small">
+        <Table sx={{minWidth: 350, width: 1200}} size="small">
           <TableHead>
             <TableRow>
               <TableCell sx={{fontWeight: 'bold'}}>Date / Time</TableCell>
@@ -52,32 +52,32 @@ const DateTime = ({locale}) => {
               <TableCell rowSpan={dateTimes.length + 1}>Date / Time</TableCell>
             </TableRow>
             {dateTimes.map((dateTime) => (
-							<TableRow key={dateTime[0]}>
+              <TableRow key={dateTime[0]}>
                 <TableCell align="left">{dateTime[0]}</TableCell>
-								<TableCell align="left">{dateTime[1]}</TableCell>
-								<TableCell align="left">{dateTime[2]}</TableCell>
-							</TableRow>
-						))}
+                <TableCell align="left">{dateTime[1]}</TableCell>
+                <TableCell align="left">{dateTime[2]}</TableCell>
+              </TableRow>
+            ))}
             <TableRow>
               <TableCell rowSpan={dates.length + 1}>Date</TableCell>
             </TableRow>
             {dates.map((date) => (
-							<TableRow key={date[0]}>
+              <TableRow key={date[0]}>
                 <TableCell align="left">{date[0]}</TableCell>
-								<TableCell align="left">{date[1]}</TableCell>
-								<TableCell align="left">{date[2]}</TableCell>
-							</TableRow>
-						))}
+                <TableCell align="left">{date[1]}</TableCell>
+                <TableCell align="left">{date[2]}</TableCell>
+              </TableRow>
+            ))}
             <TableRow>
               <TableCell rowSpan={times.length + 1}>Time</TableCell>
             </TableRow>
             {times.map((time) => (
-							<TableRow key={time[0]}>
+              <TableRow key={time[0]}>
                 <TableCell align="left">{time[0]}</TableCell>
-								<TableCell align="left">{time[1]}</TableCell>
-								<TableCell align="left">{time[2]}</TableCell>
-							</TableRow>
-						))}
+                <TableCell align="left">{time[1]}</TableCell>
+                <TableCell align="left">{time[2]}</TableCell>
+              </TableRow>
+            ))}
           </TableBody>
         </Table>
       </TableContainer>

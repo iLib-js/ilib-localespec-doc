@@ -56,19 +56,19 @@ const DaysAndMonths = ({locale}) => {
       }
     }
 
-	  for (let k = 0; k < monthLength; k++) {
+    for (let k = 0; k < monthLength; k++) {
       months.push([k + 1]);
-	  	date[k] = DateFactory({month: k + 1, type:li.getCalendar()});
-	  	for (let l = 0; l < formatLength.length; l++) {
-	  		formatter[l] = new DateFmt({locale: locale, date: 'm', length: formatLength[l], useNative: false, timezone: 'local'});
-	  		result[k] = formatter[l].format(date[k]);
-	  		nameOfMonth[monthCount] = result[k];
-	  		monthNotAlone[monthCount] = formatter[l].sysres.map[monthIter[l] + (k + 1)];
+      date[k] = DateFactory({month: k + 1, type:li.getCalendar()});
+      for (let l = 0; l < formatLength.length; l++) {
+        formatter[l] = new DateFmt({locale: locale, date: 'm', length: formatLength[l], useNative: false, timezone: 'local'});
+        result[k] = formatter[l].format(date[k]);
+        nameOfMonth[monthCount] = result[k];
+        monthNotAlone[monthCount] = formatter[l].sysres.map[monthIter[l] + (k + 1)];
         hasMonthNotAlone = typeof formatter[l].sysres.map.L1 !== 'undefined' && (nameOfMonth[monthCount] !== monthNotAlone[monthCount]);
         months[k].push(hasMonthNotAlone ? `${nameOfMonth[monthCount]} (${monthNotAlone[monthCount]})` : nameOfMonth[monthCount]);
-	  		monthCount++;
-	  	}
-	  }
+        monthCount++;
+      }
+    }
     return {days, months};
   }, [locale, li]);
 
@@ -83,7 +83,7 @@ const DaysAndMonths = ({locale}) => {
         {'(Note) If the typical type differs from the standalone type, it will be displayed in parenthesis.'}
       </Typography>
       <TableContainer sx={{mt: 3, ml: 3, mr: 3, width: 1200}}>
-				<Table sx={{minWidth: 350, width: 1200}} size="small">
+        <Table sx={{minWidth: 350, width: 1200}} size="small">
           <TableHead>
             <TableRow>
               <TableCell sx={{fontWeight: 'bold'}}>Days and Months</TableCell>
@@ -99,26 +99,26 @@ const DaysAndMonths = ({locale}) => {
               <TableCell rowSpan={days.length + 1}>Weekday</TableCell>
             </TableRow>
             {days.map((day) => (
-							<TableRow key={day[0]}>
+              <TableRow key={day[0]}>
                 <TableCell align="left">{day[0]}</TableCell>
-								<TableCell align="left">{day[1]}</TableCell>
-								<TableCell align="left">{day[2]}</TableCell>
-								<TableCell align="left">{day[3]}</TableCell>
-								<TableCell align="left">{day[4]}</TableCell>
-							</TableRow>
-						))}
+                <TableCell align="left">{day[1]}</TableCell>
+                <TableCell align="left">{day[2]}</TableCell>
+                <TableCell align="left">{day[3]}</TableCell>
+                <TableCell align="left">{day[4]}</TableCell>
+              </TableRow>
+            ))}
             <TableRow>
               <TableCell rowSpan={months.length + 1}>Month</TableCell>
             </TableRow>
             {months.map((month) => (
-							<TableRow key={month[0]}>
+              <TableRow key={month[0]}>
                 <TableCell align="left">{month[0]}</TableCell>
-								<TableCell align="left">{month[1]}</TableCell>
-								<TableCell align="left">{month[2]}</TableCell>
-								<TableCell align="left">{month[3]}</TableCell>
-								<TableCell align="left">{month[4]}</TableCell>
-							</TableRow>
-						))}
+                <TableCell align="left">{month[1]}</TableCell>
+                <TableCell align="left">{month[2]}</TableCell>
+                <TableCell align="left">{month[3]}</TableCell>
+                <TableCell align="left">{month[4]}</TableCell>
+              </TableRow>
+            ))}
           </TableBody>
         </Table>
       </TableContainer>
