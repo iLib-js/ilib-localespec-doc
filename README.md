@@ -9,7 +9,9 @@ Here's a feature list that you can see:
  * Data Format : Date/Time Duration
  * Data Format : Number
 
-and Please visit [here](Locales.md) to see the locale list.
+and Please visit [here](Locales.md) to see the locale list.  
+
+See the [release notes](./ReleaseNotes.md) for details on what is new and what has changed.
 
 #### Preview 
 <img src="./images/localeSpecDoc_Snapshot2.png" width="1000" height="600"/>
