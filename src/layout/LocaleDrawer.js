@@ -10,7 +10,7 @@ import {locales} from '../locales';
 import SearchBar from './SearchBar';
 
 const drawerWidth = 360;
-const i18nLocaleList = Object.keys(locales).sort();
+const i18nLocaleList = Object.keys(locales).sort().concat(Object.values(locales).sort());
 
 const LocaleDrawer = ({locale}) => {
   const navigate = useNavigate();
@@ -19,10 +19,15 @@ const LocaleDrawer = ({locale}) => {
 
   const clickHandler = useCallback((index) => {
     setLocaleIndex(index);
-    navigate('/locales/' + locales[localeList[index]]);
+    if (typeof locales[localeList[index]] === 'undefined'){
+      navigate('/locales/' + localeList[index]);
+    } else {
+      navigate('/locales/' + locales[localeList[index]]);
+    }
   }, [navigate, localeList]);
 
   const requestSearch = (input) => {
+    console.log("requestSearch");
     const filteredLocaleList = i18nLocaleList.filter((locale) => {
       return locale.toLowerCase().includes(input.toLowerCase());
     });
