@@ -17,7 +17,7 @@ const DateTime = ({locale}) => {
     const dates = [];
     const times = [];
     const formatLength = ['full', 'long', 'medium', 'short'];
-    const targetDate = new GregorianDate({locale: locale, year: 2015, month: 8, day: 5, hour: 13, minute: 45, second: 0});
+    const targetDate = new GregorianDate({locale: locale, year: 2024, month: 3, day: 8, hour: 13, minute: 45, second: 0});
 
     for (let i = 0; i < formatLength.length; i++) {
       let dateTimeFormatter = new DateFmt({locale: locale, type: 'datetime', length: formatLength[i], useNative: false, timezone: 'local'});
