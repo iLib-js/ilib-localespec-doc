@@ -27,7 +27,6 @@ const LocaleDrawer = ({locale}) => {
   }, [navigate, localeList]);
 
   const requestSearch = (input) => {
-    console.log("requestSearch");
     const filteredLocaleList = i18nLocaleList.filter((locale) => {
       return locale.toLowerCase().includes(input.toLowerCase());
     });
