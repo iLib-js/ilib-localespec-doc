@@ -6,7 +6,7 @@ import ilib from 'ilib';
 
 const Header = () => {
     return (
-      <AppBar position="fixed" sx={{ zIndex: (theme) => theme.zIndex.drawer + 1 }}>
+      <AppBar position="fixed" sx={{bgcolor:'#a50034', zIndex: (theme) => theme.zIndex.drawer + 1 }}>
         <Toolbar>
         <Typography variant="h6" noWrap component="div">
             {`Locale Spec Reference (iLib v${ilib.getVersion()})`}
