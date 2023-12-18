@@ -14,7 +14,7 @@ and Please visit [here](Locales.md) to see the locale list.
 See the [release notes](./ReleaseNotes.md) for details on what is new and what has changed.
 
 #### Preview 
-<img src="./images/localeSpecDoc_Snapshot2.png" width="1000" height="600"/>
+<img src="./images/localeSpecDoc_Snapshot3.png" width="1000" height="600"/>
 
 ## Getting Started
 
