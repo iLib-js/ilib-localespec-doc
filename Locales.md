@@ -104,8 +104,6 @@
 |pt-BR|Portuguese - Brazil|
 |pt-PT|Portuguese - Portugal|
 |ro-RO|Romanian - Romania|
-|sy-Cyrl-RS|Serbian - Cyrl -Serbia|
-|sy-Latn-RS|Serbian - Latn - Serbia|
 |ru-BY|Russian - Belarus|
 |ru-KG|Russian - Kyrgyzstan|
 |ru-KZ|Russian - Kazakhstan|
@@ -115,6 +113,8 @@
 |si-LK|Sinhala - Sri Lanka|
 |sk-SK|Slovak - Slovakia|
 |si-SI|Slovene - Slovenia|
+|sr-Latn-ME|Serbian - Latn - Montenegro|
+|sr-Latn-RS|Serbian - Latn - Serbia|
 |sw-Latn-KE|Swahili - Kenya|
 |sq-AL|Albanian - Albania|
 |sq-ME|Albanian - Montenegro|
