@@ -8,3 +8,4 @@ New Features:
 * Updated a search feature to be searched by BCP-47 locale style as well.
 * Changed the Header color from the default value.
 * Changed the locale from sr-Cyrl-RS to sr-Latn-ME
+* Removed the `z` option not to display timezone in Time formatting
