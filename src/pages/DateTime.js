@@ -22,7 +22,7 @@ const DateTime = ({locale}) => {
     for (let i = 0; i < formatLength.length; i++) {
       let dateTimeFormatter = new DateFmt({locale: locale, type: 'datetime', length: formatLength[i], useNative: false, timezone: 'local'});
       let dateFormatter = new DateFmt({locale: locale, type: 'date', date: 'dmwy', length: formatLength[i], useNative: false, timezone: 'local'});
-      let timeFormatter = new DateFmt({locale: locale, type: 'time', time: 'ahmsz', length: formatLength[i], useNative: false, timezone: 'local'});
+      let timeFormatter = new DateFmt({locale: locale, type: 'time', time: 'ahms', length: formatLength[i], useNative: false, timezone: 'local'});
       dateTimes.push([formatLength[i], dateTimeFormatter.template, dateTimeFormatter.format(targetDate)]);
       dates.push([formatLength[i], dateFormatter.template, dateFormatter.format(targetDate)]);
       times.push([formatLength[i], timeFormatter.template, timeFormatter.format(targetDate)]);
