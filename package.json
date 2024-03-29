@@ -1,7 +1,34 @@
 {
   "name": "ilib-localespec-doc",
   "version": "1.0.0",
-  "private": true,
+  "description": "This is the documentation for checking in locale spec information of iLib",
+  "keywords": [
+    "internationalization",
+    "i18n",
+    "iLib",
+    "locale"
+  ],
+  "homepage": "https://ilib-js.github.io/ilib-localespec-doc/",
+  "bugs": "https://github.com/iLib-js//ilib-localespec-doc/issues",
+  "license": "Apache-2.0",
+  "author": {
+    "name": "Syeonghyup Park",
+    "email": "seonghyup.park@lge.com"
+  },
+  "contributors": [
+    {
+      "name": "Syeonghyup Park",
+      "email": "seonghyup.park@lge.com"
+    },
+    {
+      "name": "Goun Lee",
+      "email": "goun.lee@lge.com"
+    },
+    {
+      "name": "Edwin Hoogerbeets",
+      "email": "ehoogerbeets@gmail.com"
+    }
+  ],
   "dependencies": {
     "@babel/core": "^7.23.9",
     "@emotion/react": "^11.11.3",
@@ -95,7 +122,6 @@
     "npm-run-all": "^4.1.5",
     "react-snap": "^1.23.0"
   },
-  "homepage": "https://ilib-js.github.io/ilib-localespec-doc/",
   "reactSnap": {
     "include": [
       "/locales/ar-EG",
