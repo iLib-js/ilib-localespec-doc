@@ -14,6 +14,7 @@ import ScriptInfo from 'ilib/lib/ScriptInfo';
 const BasicInfo = ({locale}) => {
   const li = useMemo(() => new LocaleInfo(locale), [locale]);
   const si = useMemo(() => new ScriptInfo(li.getScript()), [li]);
+  const weekName = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
   const rows = useMemo(() => [
     ['System Locale', locale],
     ['Locale Descripton', li.getLanguageName() + ' , ' + li.getRegionName() + ' (' + li.getScript() + ')'],
@@ -21,9 +22,9 @@ const BasicInfo = ({locale}) => {
     ['Default Calendar', li.getCalendar()],
     ['Clock', li.getClock()],
     ['Currency', li.getCurrency()],
-    ['Week Start at', li.getFirstDayOfWeek()],
-    ['Weekend Start at', li.getWeekEndStart()],
-    ['Weekend End at', li.getWeekEndEnd()],
+    ['Week Start at', weekName[li.getFirstDayOfWeek()]],
+    ['Weekend Start at', weekName[li.getWeekEndStart()]],
+    ['Weekend End at', weekName[li.getWeekEndEnd()]],
     ['Delimiter Quotation Start', li.getDelimiterQuotationStart()],
     ['Delimiter Quotation End', li.getDelimiterQuotationEnd()]
   ], [locale, li, si]);
