@@ -14,7 +14,7 @@ import ScriptInfo from 'ilib/lib/ScriptInfo';
 const BasicInfo = ({locale}) => {
   const li = useMemo(() => new LocaleInfo(locale), [locale]);
   const si = useMemo(() => new ScriptInfo(li.getScript()), [li]);
-  const weekName = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+  const weekName = useMemo(() => ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'], []);
   const rows = useMemo(() => [
     ['System Locale', locale],
     ['Locale Descripton', li.getLanguageName() + ' , ' + li.getRegionName() + ' (' + li.getScript() + ')'],
@@ -27,7 +27,7 @@ const BasicInfo = ({locale}) => {
     ['Weekend End at', weekName[li.getWeekEndEnd()]],
     ['Delimiter Quotation Start', li.getDelimiterQuotationStart()],
     ['Delimiter Quotation End', li.getDelimiterQuotationEnd()]
-  ], [locale, li, si]);
+  ], [locale, li, si, weekName]);
 
   return (
     <Box sx={{marginTop: 4, marginBottom: 5}}>
