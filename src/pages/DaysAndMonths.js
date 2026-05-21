@@ -35,6 +35,8 @@ const DaysAndMonths = ({locale}) => {
     const week = ['sun', 'mon', 'tue', 'wed', 'thu', 'fri','sat'];
     const weekIter = ['EEEE', 'EEE', 'EE', 'E'];
 
+    // These sample dates are anchors to produce a stable weekday order per locale/calendar.
+    // Do not update the year/day offsets without re-validating weekday labels in the table output.
     for (let i = 0; i < week.length; i++) {
       days.push([i]);
       if (locale === 'am-ET') {
@@ -58,6 +60,7 @@ const DaysAndMonths = ({locale}) => {
 
     for (let k = 0; k < monthLength; k++) {
       months.push([k + 1]);
+      // Month labels depend on month index and calendar type, not on a specific sample year.
       date[k] = DateFactory({month: k + 1, type:li.getCalendar()});
       for (let l = 0; l < formatLength.length; l++) {
         formatter[l] = new DateFmt({locale: locale, date: 'm', length: formatLength[l], useNative: false, timezone: 'local'});

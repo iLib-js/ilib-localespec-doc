@@ -1,0 +1,3 @@
+export const SAMPLE_BASE_YEAR = 2026;
+export const COPYRIGHT_START_YEAR = 2012;
+export const COPYRIGHT_END_YEAR = SAMPLE_BASE_YEAR;

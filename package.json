@@ -57,7 +57,7 @@
     "fs-extra": "^11.2.0",
     "html-webpack-plugin": "^5.6.0",
     "identity-obj-proxy": "^3.0.0",
-    "ilib": "14.20.0",
+    "ilib": "14.22.0",
     "mini-css-extract-plugin": "^2.8.0",
     "postcss": "^8.4.35",
     "postcss-flexbugs-fixes": "^5.0.2",
@@ -92,7 +92,8 @@
     "postbuild": "react-snap",
     "modifyPath": "node util/replace.js util/config.json",
     "copy": "cp tmp/package.json . ; cp tmp/index.js src/index.js",
-    "updatePath": "npm-run-all modifyPath copy"
+    "updatePath": "npm-run-all modifyPath copy",
+    "updatePreview": "node util/updatePreview.js"
   },
   "eslintConfig": {
     "extends": [
