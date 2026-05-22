@@ -17,8 +17,12 @@ See the [release notes](./ReleaseNotes.md) for details on what is new and what h
 <img src="./images/localeSpecDoc_Snapshot_v14_22_0-webos1.png" width="900" height="600"/>
 
 Run `npm run updatePreview` while the local dev server is running.
+- Recommended order:
+    1. Start dev server in terminal A: `npm start`
+    2. Capture preview in terminal B: `npm run updatePreview`
 - The script creates a versioned screenshot from `packages.ilibVersion` in `util/config.json` (for example: `localeSpecDoc_Snapshot_v14_22_0-webos1.png`).
 - It also updates the Preview image path in this `README.md`.
+- By default, it auto-detects `basename` from `src/index.js` and captures `http://localhost:3000{basename}`.
 
 ## Getting Started
 

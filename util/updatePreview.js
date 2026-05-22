@@ -1,13 +1,122 @@
 const fs = require('fs');
+const http = require('http');
+const https = require('https');
 const path = require('path');
 const {spawnSync} = require('child_process');
 
 const rootDir = path.resolve(__dirname, '..');
 const configPath = path.join(__dirname, 'config.json');
 const readmePath = path.join(rootDir, 'README.md');
+const indexJsPath = path.join(rootDir, 'src', 'index.js');
 const chromePath = process.env.CHROME_BIN || '/usr/bin/google-chrome';
-const targetUrl = process.env.PREVIEW_URL || 'http://localhost:3000/ilib/localeSpecDoc/reference';
+const previewHost = process.env.PREVIEW_HOST || 'http://localhost:3000';
 const windowSize = process.env.PREVIEW_WINDOW_SIZE || '1766,1022';
+const virtualTimeBudget = process.env.PREVIEW_VIRTUAL_TIME_BUDGET || '30000';
+const previewRequestTimeout = Number.parseInt(process.env.PREVIEW_REQUEST_TIMEOUT || '5000', 10);
+
+function normalizeBasePath(basePath) {
+    if (!basePath || basePath === '/') {
+        return '/';
+    }
+
+    const withLeadingSlash = basePath.startsWith('/') ? basePath : `/${basePath}`;
+    return withLeadingSlash.endsWith('/')
+        ? withLeadingSlash.slice(0, withLeadingSlash.length - 1)
+        : withLeadingSlash;
+}
+
+function detectBasePathFromIndexJs() {
+    if (!fs.existsSync(indexJsPath)) {
+        return '/';
+    }
+
+    const indexJs = fs.readFileSync(indexJsPath, 'utf-8');
+    const basenameMatch = indexJs.match(/basename\s*=\s*["']([^"']+)["']/);
+
+    if (!basenameMatch) {
+        return '/';
+    }
+
+    return normalizeBasePath(basenameMatch[1]);
+}
+
+const defaultPreviewUrl = `${previewHost}${detectBasePathFromIndexJs()}`;
+const targetUrl = process.env.PREVIEW_URL || defaultPreviewUrl;
+
+function printHelp() {
+    console.error('');
+    console.error('updatePreview help');
+    console.error('  1) Start dev server: npm start');
+    console.error('  2) Run capture:     npm run updatePreview');
+    console.error('');
+    console.error('Useful options (env):');
+    console.error('  PREVIEW_URL=http://localhost:3000/ilib-localespec-doc');
+    console.error('  PREVIEW_HOST=http://localhost:3000');
+    console.error('  PREVIEW_WINDOW_SIZE=1766,1022');
+    console.error('  PREVIEW_VIRTUAL_TIME_BUDGET=30000');
+    console.error('  PREVIEW_REQUEST_TIMEOUT=5000');
+}
+
+function failWithHelp(message, reason) {
+    console.error(message);
+    if (reason) {
+        console.error(`Reason: ${reason}`);
+    }
+    printHelp();
+    process.exit(1);
+}
+
+function checkPreviewUrlReachable(urlString, timeoutMs) {
+    return new Promise((resolve, reject) => {
+        let parsedUrl;
+        try {
+            parsedUrl = new URL(urlString);
+        } catch (error) {
+            reject(new Error(`Invalid PREVIEW_URL: ${urlString}`));
+            return;
+        }
+
+        const requester = parsedUrl.protocol === 'https:' ? https : http;
+
+        const request = requester.request(
+            parsedUrl,
+            {
+                method: 'GET',
+                timeout: timeoutMs,
+                headers: {
+                    'User-Agent': 'updatePreview-preflight',
+                },
+            },
+            response => {
+                response.resume();
+                if (response.statusCode && response.statusCode >= 200 && response.statusCode < 500) {
+                    resolve();
+                    return;
+                }
+
+                reject(new Error(`Preview URL returned unexpected status: ${response.statusCode || 'unknown'}`));
+            }
+        );
+
+        request.on('timeout', () => {
+            request.destroy(new Error(`Timed out after ${timeoutMs}ms`));
+        });
+
+        request.on('error', error => {
+            reject(error);
+        });
+
+        request.end();
+    });
+}
+
+async function ensurePreviewServerReady(urlString) {
+    try {
+        await checkPreviewUrlReachable(urlString, previewRequestTimeout);
+    } catch (error) {
+        failWithHelp(`Could not reach preview URL: ${urlString}`, error.message);
+    }
+}
 
 function getOutputFile() {
     const config = JSON.parse(fs.readFileSync(configPath, 'utf-8'));
@@ -48,8 +157,7 @@ function getBackupTimestamp(filePath) {
 
 function ensureChromeExists(filePath) {
     if (!fs.existsSync(filePath)) {
-        console.error(`Chrome executable was not found: ${filePath}`);
-        process.exit(1);
+        failWithHelp(`Chrome executable was not found: ${filePath}`);
     }
 }
 
@@ -86,9 +194,13 @@ function updateReadmePreviewImage(filePath) {
     }
 }
 
-function capturePreview() {
+async function capturePreview() {
     ensureChromeExists(chromePath);
+    await ensurePreviewServerReady(targetUrl);
     backupExistingPreview(outputFile);
+    fs.mkdirSync(path.dirname(outputFile), {recursive: true});
+
+    console.log(`Capturing preview from ${targetUrl}`);
 
     const result = spawnSync(
         chromePath,
@@ -98,7 +210,7 @@ function capturePreview() {
             '--no-sandbox',
             '--hide-scrollbars',
             `--window-size=${windowSize}`,
-            '--virtual-time-budget=10000',
+            `--virtual-time-budget=${virtualTimeBudget}`,
             '--run-all-compositor-stages-before-draw',
             `--screenshot=${outputFile}`,
             targetUrl,
@@ -118,4 +230,6 @@ function capturePreview() {
     console.log(`Updated preview screenshot: ${path.relative(rootDir, outputFile)}`);
 }
 
-capturePreview();
+capturePreview().catch(error => {
+    failWithHelp('Failed to capture preview.', error.message);
+});
