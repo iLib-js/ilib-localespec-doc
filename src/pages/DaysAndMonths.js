@@ -27,9 +27,9 @@ const getWeekdayAnchor = (locale) => {
   const year = calendar === 'thaisolar' ? 2565 : 2022;
 
   let dayOffset;
-  if (locale === 'am-ET' || locale === 'en-ET') {
+  if (calendar === 'ethiopic') {
     dayOffset = 10;
-  } else if (locale === 'fa-IR' || locale === 'ps-AF') {
+  } else if (calendar === 'persian') {
     dayOffset = 6;
   } else {
     dayOffset = 5;
