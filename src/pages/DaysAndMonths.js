@@ -32,7 +32,7 @@ const getWeekdayAnchor = (locale) => {
   } else if (locale === 'fa-IR' || locale === 'ps-AF') {
     dayOffset = 6;
   } else {
-    dayOffset = 8;
+    dayOffset = 5;
   }
 
   // Validate that the anchor date (dayOffset) is Sunday (getDayOfWeek() === 0)

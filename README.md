@@ -72,7 +72,7 @@ It generates `tmp/package.json` and `tmp/index.js`, then copies them into `packa
 If you changed `ilibVersion`, run `npm install` again after `npm run updatePath` so the updated dependency is installed.
 
 5. If you need to update sample years used by Date/DateRange/Copyright pages, modify `src/constants/dateConstants.js`.
-This does not apply to `src/pages/DaysAndMonths.js`, which intentionally keeps its own sample year anchors to preserve weekday ordering.
+This does not apply to `src/pages/DaysAndMonths.js`, which intentionally keeps calendar-specific weekday anchors to preserve weekday ordering across Thai Solar, Ethiopic, Persian, and default Gregorian-style calendars.
 
 
 ## Available Scripts
