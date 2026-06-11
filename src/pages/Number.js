@@ -11,6 +11,58 @@ import '@enact/i18n';
 import LocaleInfo from 'ilib/lib/LocaleInfo';
 import NumFmt from 'ilib/lib/NumFmt';
 
+const toVisibleWhitespace = (value = '') => value
+  .replace(/ /g, '⍽')
+  .replace(/\u00A0/g, '⍽')
+  .replace(/\u202F/g, '⍽');
+
+const getUnicodeLabel = (value = '') => Array.from(value)
+  .map((char) => `U+${char.codePointAt(0).toString(16).toUpperCase().padStart(4, '0')}`)
+  .join(' ');
+
+const formatVisibleValue = (value) => {
+  if (value === undefined || value === null) return '-';
+
+  const stringValue = String(value);
+  if (stringValue.length === 0) {
+    return '(empty)';
+  }
+
+  if (!/^\s+$/.test(stringValue)) {
+    return stringValue;
+  }
+
+  return toVisibleWhitespace(stringValue);
+};
+
+const renderVisibleValue = (value) => {
+  if (value === undefined || value === null) {
+    return '-';
+  }
+
+  const stringValue = String(value);
+  if (stringValue.length === 0) {
+    return '(empty)';
+  }
+
+  const visibleValue = formatVisibleValue(stringValue);
+  const characters = Array.from(stringValue);
+  const shouldShowUnicode = /^\s+$/u.test(stringValue) || characters.length === 1;
+
+  if (!shouldShowUnicode) {
+    return visibleValue;
+  }
+
+  return (
+    <Box component="span">
+      <Box component="span">{visibleValue}</Box>
+      <Box component="span" sx={{fontSize: '0.75em', color: 'text.secondary', ml: 0.5}}>
+        ({getUnicodeLabel(stringValue)})
+      </Box>
+    </Box>
+  );
+};
+
 const Number = ({locale}) => {
   const li = useMemo(() => new LocaleInfo(locale), [locale]);
   const composeNumbers = useCallback(() => {
@@ -37,6 +89,9 @@ const Number = ({locale}) => {
       <Typography variant="h7">
         {'Data Format: Number'}
       </Typography>
+       <Typography variant="subtitle1" sx={{marginBottom: 3}}>
+        (Note) Whitespace-only separators are shown as '⍽', and single-character separators include their Unicode value.
+      </Typography>
       <TableContainer sx={{mt: 3, ml: 3, mr: 3, width: 1200}}>
         <Table sx={{minWidth: 350, width: 1200}} size="small">
           <TableHead>
@@ -50,7 +105,7 @@ const Number = ({locale}) => {
             {rows.map((row) => (
               <TableRow key={row[0]}>
                 <TableCell>{row[0]}</TableCell>
-                <TableCell>{row[1]}</TableCell>
+                <TableCell sx={{whiteSpace: 'pre-wrap'}}>{renderVisibleValue(row[1])}</TableCell>
                 <TableCell>{row[2]}</TableCell>
               </TableRow>
             ))}

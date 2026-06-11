@@ -11,10 +11,12 @@ import '@enact/i18n';
 import LocaleInfo from 'ilib/lib/LocaleInfo';
 import DateRngFmt from 'ilib/lib/DateRngFmt';
 import DateFactory from 'ilib/lib/DateFactory';
+import {SAMPLE_BASE_YEAR} from '../constants/dateConstants';
 
 const DateRange = ({locale}) => {
   const li = useMemo(() => new LocaleInfo(locale), [locale]);
   const composeDateRange = useCallback(() => {
+    const y = (offset = 0) => SAMPLE_BASE_YEAR + offset;
     const ranges = ['c00', 'c01', 'c02', 'c03', 'c10', 'c11', 'c12', 'c20', 'c30'];
     const legend = [
       '(difference is less than 3 days. Year, month, and date are same, but time is different)',
@@ -29,26 +31,26 @@ const DateRange = ({locale}) => {
     ];
     const formatLength = ['full', 'long', 'medium', 'short'];
     const starts = [
-      DateFactory({year: 2023, month: 6, day: 20, hour: 13, minute: 45, second: 0, type: li.getCalendar()}),
-      DateFactory({year: 2023, month: 6, day: 20, hour: 13, minute: 45, second: 0, type: li.getCalendar()}),
-      DateFactory({year: 2023, month: 6, day: 30, hour: 13, minute: 45, second: 0, type: li.getCalendar()}),
-      DateFactory({year: 2023, month: 12, day: 30, hour: 13, minute: 45, second: 0, type: li.getCalendar()}),
-      DateFactory({year: 2023, month: 6, day: 20, hour: 13, minute: 45, second: 0, type: li.getCalendar()}),
-      DateFactory({year: 2023, month: 6, day: 20, hour: 13, minute: 45, second: 0, type: li.getCalendar()}),
-      DateFactory({year: 2023, month: 6, day: 20, hour: 13, minute: 45, second: 0, type: li.getCalendar()}),
-      DateFactory({year: 2023, month: 6, day: 20, hour: 13, minute: 45, second: 0, type: li.getCalendar()}),
-      DateFactory({year: 2023, month: 6, day: 20, hour: 13, minute: 45, second: 0, type: li.getCalendar()})
+      DateFactory({year: y(), month: 6, day: 20, hour: 13, minute: 45, second: 0, type: li.getCalendar()}),
+      DateFactory({year: y(), month: 6, day: 20, hour: 13, minute: 45, second: 0, type: li.getCalendar()}),
+      DateFactory({year: y(), month: 6, day: 30, hour: 13, minute: 45, second: 0, type: li.getCalendar()}),
+      DateFactory({year: y(), month: 12, day: 30, hour: 13, minute: 45, second: 0, type: li.getCalendar()}),
+      DateFactory({year: y(), month: 6, day: 20, hour: 13, minute: 45, second: 0, type: li.getCalendar()}),
+      DateFactory({year: y(), month: 6, day: 20, hour: 13, minute: 45, second: 0, type: li.getCalendar()}),
+      DateFactory({year: y(), month: 6, day: 20, hour: 13, minute: 45, second: 0, type: li.getCalendar()}),
+      DateFactory({year: y(), month: 6, day: 20, hour: 13, minute: 45, second: 0, type: li.getCalendar()}),
+      DateFactory({year: y(), month: 6, day: 20, hour: 13, minute: 45, second: 0, type: li.getCalendar()})
     ];
     const ends = [
-      DateFactory({year: 2023, month: 6, day: 20, hour: 15, minute: 30, second: 0, type: li.getCalendar()}),
-      DateFactory({year: 2023, month: 6, day: 22, hour: 15, minute: 30, second: 0, type: li.getCalendar()}),
-      DateFactory({year: 2023, month: 7, day: 1, hour: 9, minute: 30, second: 0, type: li.getCalendar()}),
-      DateFactory({year: 2024, month: 1, day: 1, hour: 5, minute: 30, second: 0, type: li.getCalendar()}),
-      DateFactory({year: 2023, month: 6, day: 28, hour: 5, minute: 30, second: 0, type: li.getCalendar()}),
-      DateFactory({year: 2023, month: 11, day: 28, hour: 5, minute: 30, second: 0, type: li.getCalendar()}),
-      DateFactory({year: 2024, month: 4, day: 28, hour: 5, minute: 30, second: 0, type: li.getCalendar()}),
-      DateFactory({year: 2028, month: 4, day: 28, hour: 5, minute: 30, second: 0, type: li.getCalendar()}),
-      DateFactory({year: 2045, month: 4, day: 28, hour: 5, minute: 30, second: 0, type: li.getCalendar()})
+      DateFactory({year: y(), month: 6, day: 20, hour: 15, minute: 30, second: 0, type: li.getCalendar()}),
+      DateFactory({year: y(), month: 6, day: 22, hour: 15, minute: 30, second: 0, type: li.getCalendar()}),
+      DateFactory({year: y(), month: 7, day: 1, hour: 9, minute: 30, second: 0, type: li.getCalendar()}),
+      DateFactory({year: y(1), month: 1, day: 1, hour: 5, minute: 30, second: 0, type: li.getCalendar()}),
+      DateFactory({year: y(), month: 6, day: 28, hour: 5, minute: 30, second: 0, type: li.getCalendar()}),
+      DateFactory({year: y(), month: 11, day: 28, hour: 5, minute: 30, second: 0, type: li.getCalendar()}),
+      DateFactory({year: y(1), month: 4, day: 28, hour: 5, minute: 30, second: 0, type: li.getCalendar()}),
+      DateFactory({year: y(5), month: 4, day: 28, hour: 5, minute: 30, second: 0, type: li.getCalendar()}),
+      DateFactory({year: y(22), month: 4, day: 28, hour: 5, minute: 30, second: 0, type: li.getCalendar()})
     ];
     const dateRanges = [];
 
@@ -57,7 +59,7 @@ const DateRange = ({locale}) => {
       for (let j = 0; j < formatLength.length; j++) {
         const formatter = new DateRngFmt({locale: locale, length: formatLength[j]});
         if (i === 3 && locale === 'am-ET') {
-          const amStart = DateFactory({year: 2023, month: 13, day: 30, hour: 13, minute: 45, second: 0, type: li.getCalendar()});
+          const amStart = DateFactory({year: y(), month: 13, day: 30, hour: 13, minute: 45, second: 0, type: li.getCalendar()});
           dateRanges[i].push([ranges[i] + '\n' + legend[i], formatLength[j], formatter.dateFmt.formats.range[ranges[i]][formatLength[j][0]], formatter.format(amStart, ends[i])]);
         } else {
           dateRanges[i].push([ranges[i] + '\n' + legend[i], formatLength[j], formatter.dateFmt.formats.range[ranges[i]][formatLength[j][0]], formatter.format(starts[i], ends[i])]);

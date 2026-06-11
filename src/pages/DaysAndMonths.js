@@ -12,6 +12,44 @@ import LocaleInfo from 'ilib/lib/LocaleInfo';
 import DateFmt from 'ilib/lib/DateFmt';
 import DateFactory from 'ilib/lib/DateFactory';
 
+/**
+ * Returns anchor year and day offset for generating stable weekday order.
+ * The dayOffset is chosen so that getDayOfWeek() returns 0-6 for days 0+dayOffset through 6+dayOffset.
+ * Also validates that day 0 (dayOffset) is actually Sunday (getDayOfWeek() === 0).
+ *
+ * @param {string} locale - BCP-47 locale string
+ * @returns {{year: number, dayOffset: number, calendar: string}} Anchor year, day offset, and calendar type
+ * @throws {Error} If the anchor date is not a Sunday
+ */
+const getWeekdayAnchor = (locale) => {
+  const li = new LocaleInfo(locale);
+  const calendar = li.getCalendar();
+  const year = calendar === 'thaisolar' ? 2565 : 2022;
+
+  let dayOffset;
+  if (calendar === 'ethiopic') {
+    dayOffset = 10;
+  } else if (calendar === 'persian') {
+    dayOffset = 6;
+  } else {
+    dayOffset = 5;
+  }
+
+  // Validate that the anchor date (dayOffset) is Sunday (getDayOfWeek() === 0)
+  const anchorDate = DateFactory({year, month: 6, day: dayOffset, type: calendar});
+  const dayOfWeek = anchorDate.getDayOfWeek();
+  if (dayOfWeek !== 0) {
+    throw new Error(
+      `Invalid dayOffset for locale ${locale}: \n` +
+      `'year(${year}) month(6) day(${dayOffset}) (${calendar} calendar)' ` +
+      `is not Sunday (getDayOfWeek()=${dayOfWeek}).\n` +
+      `Please adjust 'dayOffset' so that the anchor date is Sunday.\n`
+    );
+  }
+
+  return {year, dayOffset, calendar};
+};
+
 const DaysAndMonths = ({locale}) => {
   const li = useMemo(() => new LocaleInfo(locale), [locale]);
   const composeDaysAndMonths = useCallback(() => {
@@ -34,17 +72,14 @@ const DaysAndMonths = ({locale}) => {
     const monthIter = ['MMMM', 'MMM', 'NN', 'N'];
     const week = ['sun', 'mon', 'tue', 'wed', 'thu', 'fri','sat'];
     const weekIter = ['EEEE', 'EEE', 'EE', 'E'];
+    const calendar = li.getCalendar();
+    const {year: weekdayAnchorYear, dayOffset: weekdayAnchorDayOffset} = getWeekdayAnchor(locale);
 
+    // These sample dates are anchors to produce a stable weekday order per locale/calendar.
+    // Do not update the year/day offsets without re-validating weekday labels in the table output.
     for (let i = 0; i < week.length; i++) {
       days.push([i]);
-      if (locale === 'am-ET') {
-        date[i] = DateFactory({year: 2022, month: 6, day: i + 10, type:li.getCalendar()});
-      } else if (locale === 'th-TH') {
-        date[i] = DateFactory({year: 2022, month: 6, day: i + 7, type:li.getCalendar()});
-      }
-      else {
-        date[i] = DateFactory({year: 2022, month: 6, day: i + 5, type:li.getCalendar()});
-      }
+      date[i] = DateFactory({year: weekdayAnchorYear, month: 6, day: i + weekdayAnchorDayOffset, type: calendar});
       for (let j = 0; j < formatLength.length; j++) {
         formatter[j] = new DateFmt({locale: locale, date: 'w', length: formatLength[j], useNative: false, timezone: 'local'});
         result[i] = formatter[j].format(date[i]);
@@ -58,6 +93,7 @@ const DaysAndMonths = ({locale}) => {
 
     for (let k = 0; k < monthLength; k++) {
       months.push([k + 1]);
+      // Month labels depend on month index and calendar type, not on a specific sample year.
       date[k] = DateFactory({month: k + 1, type:li.getCalendar()});
       for (let l = 0; l < formatLength.length; l++) {
         formatter[l] = new DateFmt({locale: locale, date: 'm', length: formatLength[l], useNative: false, timezone: 'local'});

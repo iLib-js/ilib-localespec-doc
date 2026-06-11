@@ -11,6 +11,32 @@ import '@enact/i18n';
 import LocaleInfo from 'ilib/lib/LocaleInfo';
 import ScriptInfo from 'ilib/lib/ScriptInfo';
 
+const UNICODE_VALUE_FIELDS = new Set(['Delimiter Quotation Start', 'Delimiter Quotation End']);
+
+const getUnicodeLabel = (value = '') => Array.from(String(value))
+  .map((char) => `U+${char.codePointAt(0).toString(16).toUpperCase().padStart(4, '0')}`)
+  .join(' ');
+
+const renderInfoValue = (label, value) => {
+  if (!UNICODE_VALUE_FIELDS.has(label) || value === undefined || value === null) {
+    return value;
+  }
+
+  const stringValue = String(value);
+  if (!stringValue) {
+    return value;
+  }
+
+  return (
+    <Box component="span">
+      <Box component="span">{stringValue}</Box>
+      <Box component="span" sx={{fontSize: '0.75em', color: 'text.secondary', ml: 0.5}}>
+        ({getUnicodeLabel(stringValue)})
+      </Box>
+    </Box>
+  );
+};
+
 const BasicInfo = ({locale}) => {
   const li = useMemo(() => new LocaleInfo(locale), [locale]);
   const si = useMemo(() => new ScriptInfo(li.getScript()), [li]);
@@ -46,7 +72,7 @@ const BasicInfo = ({locale}) => {
             {rows.map((row) => (
               <TableRow key={row[0]}>
                 <TableCell>{row[0]}</TableCell>
-                <TableCell>{row[1]}</TableCell>
+                <TableCell>{renderInfoValue(row[0], row[1])}</TableCell>
               </TableRow>
             ))}
           </TableBody>
